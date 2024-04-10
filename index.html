@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contauro</title>
+<style>
+    /* Estilos básicos para a página */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: blueviolet;
+    }
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    h1 {
+        text-align: center;
+        color: white;
+    }
+    .product {
+        border: 1px solid black;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        background-color: lightblue;
+        overflow: hidden;
+    }
+    .product h2 {
+        margin-top: 0;
+    }
+    .product p {
+        margin-bottom: 5px;
+    }
+    .product img {
+        max-width: 100%;
+        max-width: 300px;
+        max-height: 150px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+    .product button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+    #cart {
+        margin-top: 20px;
+        border: 1px solid black;
+        padding: 10px;
+        border-radius: 8px;
+        background-color: lightblue;
+    }
+    #cart h2 {
+        margin-top: 0;
+    }
+    #cart ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    #cart button {
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+    #cart-total {
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>Produtos</h1>
+        <div id="products">
+            <div class="product">
+                <img src="images.jpg" alt="Tênis 1">
+                <h2>Tênis Nike</h2>
+                <p>Preço: R$500</p>
+                <button onclick="addToCart('Tênis Nike', 500)">Adicionar ao Carrinho</button>
+            </div>
+            <div class="product">
+                <img src="images (1).jpg" alt="Tênis 2">
+                <h2>Tênis Adidas</h2>
+                <p>Preço: R$550</p>
+                <button onclick="addToCart('Tênis Adidas', 550)">Adicionar ao Carrinho</button>
+            </div>
+            <div class="product">
+                <img src="Vans_Old_School.jpg" alt="Tênis 3">
+                <h2>Tênis Vans</h2>
+                <p>Preço: R$600</p>
+                <button onclick="addToCart('Tênis Vans', 600)">Adicionar ao Carrinho</button>
+            </div>
+            <div class="product">
+                <img src="allStar.jpg" alt="Tênis 4">
+                <h2>Tênis All Star</h2>
+                <p>Preço: R$350</p>
+                <button onclick="addToCart('Tênis All Star', 350)">Adicionar ao Carrinho</button>
+            </div>
+            <div class="product">
+                <img src="Jordan.jpg" alt="Tênis 5">
+                <h2>Tênis Jordan</h2>
+                <p>Preço: R$450</p>
+                <button onclick="addToCart('Tênis Jordan', 450)">Adicionar ao Carrinho</button>
+            </div>
+        </div>
+        <div id="cart">
+            <h2>Carrinho</h2>
+            <ul id="cart-items"></ul>
+            <p>Total: R$<span id="cart-total">0</span></p>
+            <button onclick="checkout()">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <script>
+        let cartItems = [];
+        let cartTotal = 0;
+
+        function addToCart(productName, price) {
+            cartItems.push({ name: productName, price: price });
+            cartTotal += price;
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartList = document.getElementById('cart-items');
+            cartList.innerHTML = '';
+            cartItems.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.name} - R$${item.price}`;
+                cartList.appendChild(li);
+            });
+            document.getElementById('cart-total').textContent = cartTotal;
+        }
+
+        function checkout() {
+            alert('Compra finalizada! Total: R$' + cartTotal);
+            cartItems = [];
+            cartTotal = 0;
+            updateCart();
+        }
+    </script>
+</body>
+</html>
